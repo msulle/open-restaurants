@@ -1,11 +1,9 @@
-const restaurantsJSON = require('./rest_hours.json');
+const { loadRestaurants, getAvailableRestaurants } = require('./restaurants');
 
-const getRestaurants = () => {
-    return restaurantsJSON;
-};
+window.onload = loadRestaurants();
 
 window.addEventListener('click', event => {
     const list = document.getElementById("restaurantSpot");
-    const restaurants = document.createTextNode(getRestaurants());    
+    const restaurants = document.createTextNode(getAvailableRestaurants(0,0));    
     list.appendChild(restaurants);
 });
