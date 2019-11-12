@@ -1,7 +1,7 @@
 const { loadRestaurants, getAvailableRestaurants } = require('./restaurants');
 
 new Vue({
-    el:'#days',
+    el:'...',
     data: {
         selected: ''
     }
