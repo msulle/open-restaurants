@@ -1,4 +1,3 @@
 module.exports = {
-  publicPath: "/open-restaurants",
-  outputDir: "docs"
+  publicPath: "/open-restaurants"
 };
