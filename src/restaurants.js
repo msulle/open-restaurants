@@ -1,4 +1,4 @@
-const restaurantsJSON = require('./rest_hours.json');
+const restaurantsJSON = require('./assets/rest_hours.json');
 
 const DaysEnum = {
     'Mon': 0,
@@ -44,7 +44,7 @@ const parseDays = (dayIndices, currentDays) => {
     if (lastDay !== '') {
         const lastDayIndex = DaysEnum[lastDay];
 
-        dayIndices.push(...range(dayIndices[0] + 1, lastDayIndex));
+        dayIndices.push(...range(DaysEnum[firstDay] + 1, lastDayIndex));
     }
 
     return dayIndices;
@@ -96,13 +96,7 @@ const saveRestaurant = (r) => {
 
 const loadRestaurants = () => {
     restaurantsJSON.forEach((r) => saveRestaurant(r));
+    return dateTimesStorage;
 };
 
-const getAvailableRestaurants = (dateInput, timeInput) => {
-    return dateTimesStorage[dateInput][timeInput];
-};
-
-module.exports = {
-    loadRestaurants,
-    getAvailableRestaurants
-}
+export default loadRestaurants

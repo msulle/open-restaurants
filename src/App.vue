@@ -1,93 +1,44 @@
 <template>
   <div id="app" class="small-container">
-    <h1>Employees</h1>
+    <h1>Available Restaurants</h1>
 
-    <employee-form @add:employee="addEmployee" />
-    <employee-table
-      :employees="employees"
-      @delete:employee="deleteEmployee"
-      @edit:employee="editEmployee"
-    />
+    <availability-form @update:availability="updateRestaurants" />
+    <restaurant-table :restaurants="restaurants" />
   </div>
 </template>
 
 <script>
-  import EmployeeTable from '@/components/EmployeeTable.vue'
-  import EmployeeForm from '@/components/EmployeeForm.vue'
+  import RestaurantTable from '@/components/RestaurantTable.vue'
+  import AvailabilityForm from '@/components/AvailabilityForm.vue'
+  import loadRestaurants from '@/restaurants.js'
   export default {
     name: 'app',
     components: {
-      EmployeeTable,
-      EmployeeForm
+      RestaurantTable,
+      AvailabilityForm
     },
     data() {
       return {
-        employees: [],
-      }
-    },
-    methods: {
-      async getEmployees() {
-        try {
-          const response = await fetch('https://jsonplaceholder.typicode.com/users')
-          const data = await response.json()
-          this.employees = data
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        }
-      },
-      async addEmployee(employee) {
-        try {
-          const response = await fetch('https://jsonplaceholder.typicode.com/users', {
-            method: 'POST',
-            body: JSON.stringify(employee),
-            headers: { 'Content-type': 'application/json; charset=UTF-8' },
-          })
-          const data = response.json()
-          this.employees = [...this.employees, data]
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        }
-      },
-      async editEmployee(id, updatedEmployee) {
-        try {
-          const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify(updatedEmployee),
-            headers: { 'Content-type': 'application/json; charset=UTF-8' },
-          })
-          const data = await response.json()
-          this.employees = this.employees.map(employee => (employee.id === id ? data : employee))
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        }
-      },
-      async deleteEmployee(id) {
-        try {
-          await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-            method: 'DELETE'
-          })
-          this.employees = this.employees.filter(employee => employee.id !== id)
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error(err)
-        }
-      },
-      deleteEmployee0(id) {
-        this.employees = this.employees.filter(
-          employee => employee.id !== id
-        )
-      },
-      editEmployee0(id, updatedEmployee) {
-        this.employees = this.employees.map(employee => 
-          employee.id === id ? updatedEmployee : employee
-        )
+        restaurants: [],
+        restaurantDatabase: [],
       }
     },
     mounted() {
-      this.getEmployees()
+      this.initializeRestaurants()
+      this.updateRestaurants({day: 0, hour: 0, minute: 0, meridian: 'am'})
+    },
+    methods: {
+      initializeRestaurants() {
+        this.restaurantDatabase = loadRestaurants()
+        this.restaurants = this.restaurantDatabase
+      },
+      updateRestaurants(availability) {
+        let hour = availability.meridian === "am"
+          ? Number(availability.hour)
+          : Number(availability.hour) + 12;
+        let time = (hour + Number(availability.minute)) * 2;
+        this.restaurants = this.restaurantDatabase[availability.day][time]
+      },
     },
   }
 </script>
