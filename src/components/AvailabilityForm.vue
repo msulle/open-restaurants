@@ -1,8 +1,8 @@
 <template>
   <div id="availability-form">
     <form @submit.prevent="handleSubmit">
-      <label>Day</label>
-      <select v-model="availability.day">
+      <label>Select your availability:</label>
+      <select class="day" v-model="availability.day">
         <option value="0">Monday</option>
         <option value="1">Tuesday</option>
         <option value="2">Wednesday</option>
@@ -11,8 +11,7 @@
         <option value="5">Saturday</option>
         <option value="6">Sunday</option>
       </select>
-      <label>Time</label>
-      <select v-model="availability.hour">
+      <select class="time" v-model="availability.hour">
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -26,11 +25,11 @@
         <option>11</option>
         <option>12</option>
       </select>
-      <select v-model="availability.minute">
+      <select class="time" v-model="availability.minute">
         <option value="0">00</option>
         <option value=".5">30</option>
       </select>
-      <select v-model="availability.meridian">
+      <select class="time" v-model="availability.meridian">
         <option>am</option>
         <option>pm</option>
       </select>
@@ -60,8 +59,16 @@
   }
 
   select {
-    width: 33%;
     display: inline-block;
+  }
+
+  .day {
+    width: 8rem;
+    margin-right: 1rem;
+  }
+
+  .time {
+    width: 4rem;
   }
 
   [class*='-message'] {

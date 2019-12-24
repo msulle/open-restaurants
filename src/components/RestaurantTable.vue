@@ -4,7 +4,7 @@
     <table v-else>
       <thead>
         <tr>
-          <th>Restaurant Name</th>
+          <th>Restaurant Names</th>
         </tr>
       </thead>
       <tbody>

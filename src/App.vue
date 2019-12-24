@@ -41,9 +41,8 @@
           ? Number(availability.hour)
           : Number(availability.hour) + 12;
         let time = (hour + Number(availability.minute)) * 2;
+
         this.restaurants = this.restaurantDatabase[availability.day][time]
-        // eslint-disable-next-line no-console
-        console.log(this.restaurants.length)
       },
       getCurrentDayTime() {
         let now = new Date()
