@@ -3,7 +3,6 @@
     <form @submit.prevent="handleSubmit">
       <label>Day</label>
       <select v-model="availability.day">
-        <option disabled value="">Select a day</option>
         <option value="0">Monday</option>
         <option value="1">Tuesday</option>
         <option value="2">Wednesday</option>
@@ -14,7 +13,6 @@
       </select>
       <label>Time</label>
       <select v-model="availability.hour">
-        <option disabled value="">Hour</option>
         <option>1</option>
         <option>2</option>
         <option>3</option>
@@ -29,10 +27,8 @@
         <option>12</option>
       </select>
       <select v-model="availability.minute">
-        <option value=".0">00</option>
-        <option value=".0">15</option>
+        <option value="0">00</option>
         <option value=".5">30</option>
-        <option value=".5">45</option>
       </select>
       <select v-model="availability.meridian">
         <option>am</option>
@@ -46,15 +42,9 @@
 <script>
   export default {
     name: 'availability-form',
+    props: ['availability'],
     data() {
-      return {
-        availability: {
-          day: '',
-          hour: '',
-          minute: '',
-          meridian: '',
-        },
-      }
+      return this.availability
     },
     methods: {
       handleSubmit() {
