@@ -1,7 +1,7 @@
 <template>
   <div id="availability-form">
     <form @submit.prevent="handleSubmit">
-      <label>Select your availability:</label>
+      <h4>Select your availability:</h4>
       <select class="day" v-model="availability.day">
         <option value="0">Monday</option>
         <option value="1">Tuesday</option>
@@ -29,7 +29,7 @@
         <option value="0">00</option>
         <option value=".5">30</option>
       </select>
-      <select class="time" v-model="availability.meridian">
+      <select class="time meridian" v-model="availability.meridian">
         <option>am</option>
         <option>pm</option>
       </select>
@@ -69,6 +69,10 @@
 
   .time {
     width: 4rem;
+  }
+
+  .meridian {
+    margin-right: 1rem;
   }
 
   [class*='-message'] {
