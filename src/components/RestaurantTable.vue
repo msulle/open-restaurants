@@ -1,6 +1,8 @@
 <template>
   <div id="restaurant-table">
-    <p v-if="restaurants.length < 1" class="empty-table" />
+    <p v-if="restaurants.length < 1" class="empty-table">
+      No restaurants open
+    </p>
     <table v-else>
       <thead>
         <tr>
