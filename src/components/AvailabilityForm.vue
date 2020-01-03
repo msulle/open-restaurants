@@ -27,7 +27,7 @@
       </select>
       <select class="time" v-model="availability.minute">
         <option value="0">00</option>
-        <option value=".5">30</option>
+        <option value="0.5">30</option>
       </select>
       <select class="time meridian" v-model="availability.meridian">
         <option>am</option>
