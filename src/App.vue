@@ -42,7 +42,7 @@
           : Number(availability.hour) + 12;
         let time = (hour + Number(availability.minute)) * 2;
 
-        this.restaurants = this.restaurantDatabase[availability.day][time]
+        this.restaurants = this.restaurantDatabase[availability.day][time] || []
       },
       getCurrentDayTime() {
         let now = new Date()
